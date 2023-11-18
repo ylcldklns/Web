@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>侧边栏</title>
+  <style>
+    body {
+      background-image: url(https://s.cn.bing.net/th?id=OHR.GrasslandsNationalParkSaskachewan_EN-CN2748757301_UHD.jpg&w=3840&h=2160&c=8&rs=1&o=3&r=0);
+      background-size: cover;
+    }
+
+    /* 侧边栏样式 */
+    .sidebar {
+      width: 200px;
+      height: 100vh;
+      background-color: #fff;
+      position: fixed;
+      top: 0;
+      left: -200px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      transition: left 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    /* 元素圆角样式 */
+    .rounded {
+      border-radius: 15px;
+    }
+
+    /* 动画效果 */
+    .animated {
+      animation-duration: 2.5s;
+      animation-fill-mode: both;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* 按钮样式 */
+    .btn {
+      padding: 10px 20px;
+      background-color: #008CBA;
+      color: #fff;
+      border-radius: 15px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #005F7F;
+    }
+
+    /* 输入框样式 */
+    .input {
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .input:focus {
+      outline: none;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    /* 毛玻璃效果 */
+    .glass {
+      background-color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+    }
+
+    /* 阴影效果 */
+    .shadow {
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    /* 新添加的功能 */
+    .content {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      color: #fff;
+    }
+
+ 
+.item {
+  cursor: pointer;
+  padding: 10px 20px 10px 15px;
+  transition: background-color 0.3s ease;
+}
+
+    .item:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .active {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .home-content {
+      display: none;
+    }
+
+    .home-content.show {
+      display: block;
+    }
+
+    .more-content {
+      display: none;
+    }
+
+    .more-content.show {
+      display: block;
+    }
+
+    .author-content {
+      display: none;
+    }
+
+    .author-content.show {
+      display: block;
+    }
+
+    /* 头像和昵称样式 */
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .nickname {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+   
+.sidebar {
+  z-index: 9999;
+}
+.sidebar {
+  position: fixed;
+  z-index: 9999;
+}
+
+.other-element {
+  position: relative;
+  z-index: 1; 
+}
+ 
+  </style>
+  <script>
+    let currentContent = 'home';
+
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      const glass = document.querySelector('.glass');
+      sidebar.classList.toggle('open');
+      glass.classList.toggle('shadow');
+    }
+
+    function showContent(content) {
+      const homeContent = document.querySelector('.home-content');
+      const moreContent = document.querySelector('.more-content');
+      const authorContent = document.querySelector('.author-content');
+
+      homeContent.classList.remove('show');
+      moreContent.classList.remove('show');
+      authorContent.classListClass="show";
+
+      if (content === 'home') {
+        homeContent.classList.add('show');
+      } else if (content === 'more'){
+        moreContent.classList.add('show');
+      } else if (content === 'author') {
+        authorContent.classList.add('show');
+      }
+
+      currentContent = content;
+    }
+
+    function closeSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      const glass = document.querySelector('.glass');
+      sidebar.classList.remove('open');
+      glass.classList.remove('shadow');
+    }
+  </script>
+</head>
+<body>
+  <div class="sidebar animated fadeIn">
+    <div class="profile">
+      <img class="avatar" src="https://cn.bing.com/th?id=OHR.ClamBears_EN-CN1519152673_UHD.jpg&w=3840&h=2160&c=8&rs=1&o=3&r=0">
+      <span class="nickname">ks</span>
+    </div>
+    <ul>
+      <li class="item active"><a href="#" onclick="showContent('home')">首页</a></li>
+      <li class="item"><a href="#" onclick="showContent('more')">更多</a></li>
+      <li class="item"><a href="#" onclick="showContent('author')">作者快手</br>ylcldklns1</a></li>
+    </ul>
+  </div>
+  
+  <button class="btn rounded animated fadeIn" onclick="toggleSidebar()">                                                      ☰</button>
+  
+  <input type="text" class="input rounded animated fadeIn" placeholder="摆设，用于美观......">
+  
+  <div class="glass rounded animated fadeIn">
+    <div class="content home-content show">
+      <h1>首页</h1>
+      <p id="time"></p>
+    </div>
+    <div class="content more-content">
+      <h1>更多</h1>
+    </div>
+    <div class="content author-content">
+      <h1>作者</h1>
+    </div>
+  </div>
+</body>
+</html>
